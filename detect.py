@@ -26,8 +26,8 @@ def arg_parse():
     parser.add_argument("--images", dest = 'images', help = "Image / Directory conatining images to perform detection upon", default = "imgs", type = str)
     parser.add_argument("--det", dest = 'det', help = "Image / Directory to store detections to ", default = "det", type = str)
     parser.add_argument("--bs", dest = "bs", help = "Batch Size", default = 1)
-    parser.add_argument("--confidence", dest = "confidence", help ="Object Confidence to filter predictions", default = 0.5)
-    parser.add_argument("--nms_thresh", dest = "nms_thresh", help ="NMS Threshold", default = 0.4)
+    parser.add_argument("--confidence", dest = "confidence", help ="Object Confidence to filter predictions", default = 0.8)
+    parser.add_argument("--nms_thresh", dest = "nms_thresh", help ="NMS Threshold", default = 0.5)
     parser.add_argument("--cfg ", dest = "cfgfile", help ="Config file", default = "cfg/yolov3.cfg", type = str)
     parser.add_argument("--weights", dest = "weightsfile", help ="Weightsfile", default = "yolov3.weights", type = str)
     parser.add_argument("--reso", dest = "reso", help ="Input resolution of the network. Increase to increase accuracy", default = 416, type = str)
@@ -113,7 +113,8 @@ for i, batch in enumerate(im_batches):
     start = time.time()
     if CUDA:
         batch = batch.cuda()
-    prediction = model(Variable(batch, volatile =True), CUDA)
+    with torch.no_grad():
+        prediction = model(Variable(batch), CUDA)
     prediction = write_results(prediction, confidence, num_classes, nms_conf = nms_thresh)
     end = time.time()
 
