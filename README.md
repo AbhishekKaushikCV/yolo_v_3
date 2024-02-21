@@ -52,12 +52,18 @@ Average time_per_img     : 0.273
 
 pallete :  For the bounding box of different objects in a image we need different color of bounding boxe.For this we use this pickle file that contains many colors to randomly choose from.
 
+## Prediction Visualizations:
+### Detection on normal image:
+<p align="center">
+  <img src="det/det_cycle_person_dog.jpg" width="50%">
+</p>
+
+### Detection on thermal image:
+<p align="center">
+  <img src="det/det_flir1.jpeg" width="50%">
+</p>
 
 
 
 
 
-
-
-
-Source code:- `https://blog.paperspace.com/how-to-implement-a-yolo-object-detector-in-pytorch/`
